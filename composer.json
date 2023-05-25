@@ -1,0 +1,24 @@
+{
+    "name": "nelwhix/filepath",
+    "description": "file i/o utilities for different OS architectures",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Nelwhix\\Filepath\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nelson Isioma",
+            "email": "58360242+Nelwhix@users.noreply.github.com"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^2.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
