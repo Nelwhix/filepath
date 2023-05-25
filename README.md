@@ -10,7 +10,8 @@ this:
 ```
 
 I then remembered that golang's filepath package would fluently join
-a url like this
+a url like this. So this is a port of the methods in golang's path/filepath
+package
 
 ## Usage
 - Join Method:
