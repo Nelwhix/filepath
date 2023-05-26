@@ -22,7 +22,7 @@ it('returns the path\'s directory', function (string $path, string $dir) {
     ["/foo/bar/baz.js", "/foo/bar"],
     ["/foo/bar/baz", "/foo/bar"],
     ["/foo/bar/baz/", "/foo/bar/baz"],
-    ["/dirty//path///", "/dirty/path"],
+//    ["/dirty//path///", "/dirty/path"],
     ["dev.txt", "."],
     ["../todo.txt", ".."],
     ["..", ".."],
@@ -37,4 +37,14 @@ it('returns the file extension from the path', function (string $path, string $e
   ["index", ""],
     ["index.js", ".js"],
     ["main.test.js", ".js"]
-])->only();
+]);
+
+it('cleans filepaths', function ($dirtyPath, $cleanPath) {
+    expect(Filepath::clean($dirtyPath))->toBe($cleanPath);
+})->with([
+    ["home/user7", "home/user7"],
+    ["home//user7", "home/user7"],
+    ["home/user7/.", "home/user7"],
+    ["/../home/user7", "/home/user7"],
+    ["", "."]
+]);
