@@ -13,6 +13,11 @@ I then remembered that golang's filepath package would fluently join
 a url like this. So this is a port of the methods in golang's path/filepath
 package
 
+## Installation
+```bash
+    composer require nelwhix/filepath
+```
+
 ## Usage
 - Join Method:
 Using the static 'join' method the code for the example earlier will
