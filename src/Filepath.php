@@ -55,10 +55,12 @@ class Filepath {
         $base = Filepath::base($path);
         $lIndex = strrpos($base, ".");
 
+        if (!$lIndex) {
+            return "";
+        }
+
         return substr($base, $lIndex);
     }
 }
-
-var_dump(Filepath::dir("/foo/bar/baz.js"));
 
 

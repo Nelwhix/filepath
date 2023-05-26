@@ -32,5 +32,9 @@ it('returns the path\'s directory', function (string $path, string $dir) {
 ]);
 
 it('returns the file extension from the path', function (string $path, string $ext) {
-
-});
+    expect(Filepath::ext($path))->toBe($ext);
+})->with([
+  ["index", ""],
+    ["index.js", ".js"],
+    ["main.test.js", ".js"]
+])->only();
