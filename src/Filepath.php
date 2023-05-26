@@ -59,6 +59,6 @@ class Filepath {
     }
 }
 
-
+var_dump(Filepath::dir("/foo/bar/baz.js"));
 
 
