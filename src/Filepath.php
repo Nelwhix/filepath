@@ -2,6 +2,8 @@
 
 namespace Nelwhix\Filepath;
 
+require __DIR__ . '/../vendor/autoload.php';
+
 class Filepath {
     public static function join(string ...$elements): string {
         $formattedPath = "";
@@ -44,11 +46,14 @@ class Filepath {
             return "/";
         }
 
-        return rtrim(substr(Filepath::clean($path), 0, $lastIndex), "/");
+        return rtrim(substr($path, 0, $lastIndex), "/");
     }
 
     public static function clean(string $dirtyPath): string {
-        return preg_replace('#/+#', '/', $dirtyPath);
+        if ($dirtyPath === "") return ".";
+        $dirtyPath = preg_replace("/\./", "", $dirtyPath);
+
+        return rtrim(preg_replace('#/+#', '/', $dirtyPath), "/");
     }
 
     public static function ext(string $path): string {
@@ -61,6 +66,29 @@ class Filepath {
 
         return substr($base, $lIndex);
     }
+
+    public static function split(string $path): FileInfo {
+        return new FileInfo(Filepath::base($path), Filepath::dir($path));
+    }
+
+    public static function walk(string $root, callable $callback): void {
+        $iterator = new \DirectoryIterator($root);
+
+        foreach ($iterator as $i) {
+            $callback($i);
+        }
+    }
+
+    public static function glob(string $pattern, string $root): array {
+        $matches = [];
+        Filepath::walk($root, function (\DirectoryIterator $i) use ($pattern, &$matches) {
+            if (fnmatch($pattern, $i->getFilename())) {
+                $matches[] = $i->getFilename();
+            }
+        });
+
+        return $matches;
+    }
 }
 
-
+var_dump(Filepath::dir("../todo.txt"));
